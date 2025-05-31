@@ -6,9 +6,21 @@ public class Player
 
     public string Name { get; set; }
 
-    public string CurrentRoom { get; set; }
-
     public int Health { get; set; }
 
-    public List<string> Inventory { get; set; }
+    public Room CurrentRoom { get; set; }
+
+    public List<Item> Inventory { get; set; }
+
+    public Player() { }
+
+    public void TakeDamage() { }
+
+    public void Heal() { }
+
+    public void AddToInventory() { }
+
+    public void RemoveFromInventory() { }
+    
+    public void HasItem() {}
 }
