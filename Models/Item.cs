@@ -14,7 +14,11 @@ public class Item
 
     // Damage
 
-    public Item() { }
+    public Item(int id, string name)
+    {
+        Id = id;
+        Name = name;
+    }
 
     public void Use()
     {
