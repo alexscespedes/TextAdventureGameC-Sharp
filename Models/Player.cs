@@ -43,10 +43,17 @@ public class Player
 
     public void AddToInventory(Item item)
     {
+        if (Inventory.Count > 25)
+        {
+            Console.WriteLine($"The  inventory of player {Name} is full of capacity");
+            return;
+        }
+
         var itemDuplicate = Inventory.GroupBy(x => x.Id).Any(g => g.Count() > 1);
         if (itemDuplicate)
         {
             Console.WriteLine($"The item [{item.Name}] is already in the inventory of player {Name}");
+            return;
         }
         Inventory.Add(item);
         Console.WriteLine("All godd!");
@@ -56,7 +63,11 @@ public class Player
 
     public void HasItem() { }
 
-    public void GetItem() { }
+    public Item GetItem(string itemName)
+    {
+        return Inventory.SingleOrDefault(item => item.Name == itemName)!;
+        
+    }
 
     public void ShowInventory() { }
 
