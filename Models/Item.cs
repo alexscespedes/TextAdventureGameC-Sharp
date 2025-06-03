@@ -2,6 +2,7 @@ namespace TextAdventureGame;
 
 public class Item
 {
+    static int nextId;
     public int Id { get; set; }
 
     public string Name { get; set; }
@@ -14,10 +15,13 @@ public class Item
 
     // Damage
 
-    public Item(int id, string name)
+    public Item(string name, string description, bool isUsable, bool isWeapon)
     {
-        Id = id;
+        Id = Interlocked.Increment(ref nextId);
         Name = name;
+        Description = description;
+        IsUsable = isUsable;
+        IsWeapon = isWeapon;
     }
 
     public void Use()

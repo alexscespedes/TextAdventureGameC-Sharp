@@ -2,6 +2,7 @@ namespace TextAdventureGame;
 
 public class Room
 {
+    static int nextId;
     public int Id { get; set; }
 
     public string Name { get; set; }
@@ -14,9 +15,14 @@ public class Room
 
     public List<NPC> NPCs { get; set; }
 
-    public Room ()
+    public Room (string name, string description)
     {
-
+        Id = Interlocked.Increment(ref nextId);
+        Name = name;
+        Description = description;
+        Exits = new Dictionary<string, Room>();
+        Items = new List<Item>();
+        NPCs = new List<NPC>();
     }
     
     public void AddExit() { }

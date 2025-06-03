@@ -10,14 +10,12 @@ public class Player
     public List<Item> Inventory { get; set; }
     public bool IsAlive { get; set; } = true;
 
-
-
-    public Player(string name)
+    public Player(string name, Room currentRoom)
     {
         Id = Interlocked.Increment(ref nextId);
         Name = name;
         Inventory = new List<Item>();
-        // CurrentRoom = currentRoom;
+        CurrentRoom = currentRoom;
     }
 
     public void TakeDamage(int amount)
@@ -59,20 +57,68 @@ public class Player
         Console.WriteLine("All godd!");
     }
 
-    public void RemoveFromInventory() { }
-
-    public void HasItem() { }
-
-    public Item GetItem(string itemName)
+    public void RemoveFromInventory(Item item)
     {
-        return Inventory.SingleOrDefault(item => item.Name == itemName)!;
+        var itemRemove = Inventory.SingleOrDefault(i => i.Id == item.Id);
+
+        if (itemRemove != null)
+        {
+            Inventory.Remove(itemRemove);
+            return;
+        }
+        Console.WriteLine("No item to delete has been found.");
+    }
+
+    public void HasItem(string itemName)
+    {
+        if (string.IsNullOrEmpty(itemName))
+        {
+            Console.WriteLine("Name cannot be empty");
+            return;
+        }
+
+        var itemMatched = Inventory.SingleOrDefault(item => item.Name.Contains(itemName.Trim(), StringComparison.InvariantCultureIgnoreCase))!;
+
+        if (itemMatched != null)
+        {
+            Console.WriteLine(itemMatched.Name);
+            return;
+        }
+        Console.WriteLine($"Player {Name} doesn't have {itemName} associated.");
         
     }
 
-    public void ShowInventory() { }
+    public Item GetItem(string itemName)
+    {
+        var item = Inventory.SingleOrDefault(item => item.Name == itemName);
 
-    // public override string ToString()
-    // {
-    //     return $"[Player #{Id}] | {Name} {Health} {CurrentRoom} {Inventory.Count} {Health}";
-    // }
+        if (item == null)
+        {
+            Console.WriteLine("No item has been found.");
+            return null!;
+        }
+        return item;
+        
+    }
+
+    public void ShowInventory()
+    {
+        if (Inventory.Count == 0)
+        {
+            Console.WriteLine($"{Name}'s Inventory is empty ");
+        }    
+
+        foreach (var item in Inventory)
+        {
+            string usable = item.IsUsable ? "Yes" : "No";
+            string weapon = item.IsWeapon ? "Yes" : "No";
+            Console.WriteLine($"Item Name: {item.Name} | Item Description: {item.Description} | IsUsable: {usable} | Is a Weapon: {weapon}");
+        }
+    }
+
+    public override string ToString()
+    {
+        string status = IsAlive ? "Alive" : "Dead";
+        return $"[Player #{Id}] | {Name} | {Health} | {CurrentRoom.Name} | {Inventory.Count} | {status}";
+    }
 }
