@@ -58,9 +58,64 @@ public class Room
         Console.WriteLine($"Direction: {direction} exits!");
     }
 
-    public void RemoveItem() { }
+    public void AddItem(Item item)
+    {
+        Items.Add(item);
+    }
 
-    public void AddItem() { }
+    public void RemoveItem(Item item)
+    {
+        var itemRemove = Items.SingleOrDefault(i => i.Id == item.Id);
 
+        if (itemRemove != null)
+        {
+            Items.Remove(itemRemove);
+            return;
+        }
+        Console.WriteLine("No item to delete has been found.");
+    }
 
+    public void RemoveItemByName(string itemName)
+    {
+        var itemRemove = Items.SingleOrDefault(i => i.Name == itemName);
+
+        if (itemRemove != null)
+        {
+            Items.Remove(itemRemove);
+            return;
+        }
+        Console.WriteLine("No item to delete has been found.");
+    }
+
+    public void HasItem(string itemName)
+    {
+        if (string.IsNullOrEmpty(itemName))
+        {
+            Console.WriteLine("Name cannot be empty");
+            return;
+        }
+
+        var itemMatched = Items.SingleOrDefault(item => item.Name.Contains(itemName.Trim(), StringComparison.InvariantCultureIgnoreCase))!;
+
+        if (itemMatched != null)
+        {
+            Console.WriteLine(itemMatched.Name);
+            return;
+        }
+        Console.WriteLine($"Item not found in Room: {Name}");
+        
+    }
+
+    public Item GetItem(string itemName)
+    {
+        var item = Items.SingleOrDefault(item => item.Name == itemName);
+
+        if (item == null)
+        {
+            Console.WriteLine("No item has been found.");
+            return null!;
+        }
+        return item;
+        
+    }
 }
