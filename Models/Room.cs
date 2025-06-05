@@ -25,6 +25,7 @@ public class Room
         NPCs = new List<NPC>();
     }
 
+    // Connection/Exit Methods
     public void AddExit(string direction, Room room)
     {
         Exits.Add(direction, room);
@@ -57,6 +58,8 @@ public class Room
         }
         Console.WriteLine($"Direction: {direction} exits!");
     }
+
+    // Item Management Methods
 
     public void AddItem(Item item)
     {
@@ -103,7 +106,7 @@ public class Room
             return;
         }
         Console.WriteLine($"Item not found in Room: {Name}");
-        
+
     }
 
     public Item GetItem(string itemName)
@@ -116,6 +119,57 @@ public class Room
             return null!;
         }
         return item;
-        
+
+    }
+
+    // NPC Management Methods
+
+    public void AddNPC(NPC npc)
+    {
+        NPCs.Add(npc);
+    }
+
+    public void RemoveNPC(NPC npc)
+    {
+        var npcRemove = NPCs.SingleOrDefault(i => i.Id == npc.Id);
+
+        if (npcRemove != null)
+        {
+            NPCs.Remove(npcRemove);
+            return;
+        }
+        Console.WriteLine("No NPC to delete has been found.");
+    }
+
+    public void HasNPC(string npcName)
+    {
+        if (string.IsNullOrEmpty(npcName))
+        {
+            Console.WriteLine("Name cannot be empty");
+            return;
+        }
+
+        var npcMatched = NPCs.SingleOrDefault(npc => npc.Name.Contains(npcName.Trim(), StringComparison.InvariantCultureIgnoreCase))!;
+
+        if (npcMatched != null)
+        {
+            Console.WriteLine(npcMatched.Name);
+            return;
+        }
+        Console.WriteLine($"NPC not found in Room: {Name}");
+
+    }
+
+    public NPC GetNPC(string npcName)
+    {
+        var npc = NPCs.SingleOrDefault(npc => npc.Name == npcName);
+
+        if (npc == null)
+        {
+            Console.WriteLine("No item has been found.");
+            return null!;
+        }
+        return npc;
+
     }
 }
