@@ -28,7 +28,13 @@ public class Room
     // Connection/Exit Methods
     public void AddExit(string direction, Room room)
     {
+        if (Exits.ContainsKey(direction) && Exits.ContainsValue(room))
+        {
+            Console.WriteLine($"The connection: [{direction} - {room.Name}] is already in the Connection/Exit Dictionary");
+            return;
+        }
         Exits.Add(direction, room);
+        Console.WriteLine($"Connection added successfully");
     }
 
     public void RemoveExit(string direction)
@@ -171,5 +177,34 @@ public class Room
         }
         return npc;
 
+    }
+
+    // Display Methods
+
+    public void GetFullDescription()
+    {
+        if (Exits.Count == 0 || Items.Count == 0 || NPCs.Count == 0)
+        {
+            Console.WriteLine($"Room: has any of the lists empty.");
+            return;
+        }
+
+        Console.WriteLine($"Room Description: {Description}");
+
+        foreach (var e in Exits)
+        {
+            Console.WriteLine($"Exit direction: {e.Key} | Exit Room: {e.Value.Name}");
+        }
+
+        foreach (var i in Items)
+        {
+            Console.WriteLine($"Item Name: {i.Name} | Item Description: {i.Description}");
+        }
+        
+        foreach (var npc in NPCs)
+        {
+            Console.WriteLine($"Item Name: {npc.Name} | Item Description: {npc.Description}");
+        }
+       
     }
 }
