@@ -101,12 +101,17 @@ public class Player
         
     }
 
+    public void MoveTo(Room room)
+    {
+        CurrentRoom = room;
+    }
+
     public void ShowInventory()
     {
         if (Inventory.Count == 0)
         {
             Console.WriteLine($"{Name}'s Inventory is empty ");
-        }    
+        }
 
         foreach (var item in Inventory)
         {
