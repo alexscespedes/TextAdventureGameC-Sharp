@@ -19,9 +19,9 @@ class Program
         var player2 = new Player("Stefan Salvatore", room5);
         */
 
-        var lambo = new Item("Lamboghini", "The Fancy Car");
+        var cpu = new NPC("Lamboghini", "The Fancy Car", ["Hey friend", "ready to play?"] );
 
-        Console.WriteLine(lambo.ToString());
+        cpu.Speak();
 
 
 

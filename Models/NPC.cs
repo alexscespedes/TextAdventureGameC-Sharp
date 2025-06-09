@@ -10,23 +10,39 @@ public class NPC
 
     public List<string> Dialogue { get; set; }
 
-    public bool IsFriendly { get; set; }
-
-    public NPC() { }
+    public NPC(string name, string description, List<string> strings)
+    {
+        Name = name;
+        Description = description;
+        Dialogue = strings;
+    }
 
     public void Speak()
     {
+        if (!CanTalk())
+        {
+            Console.WriteLine($"NPC {Name} doesn't have conversations ");
+        }
 
+        foreach (var text in Dialogue)
+        {
+            Console.WriteLine($"NPC: {text}");
+        }
     }
 
-    public void GiveItem()
+    public bool CanTalk()
     {
+        if (Dialogue.Count == 0)
+        {
+            return false;
+        }
 
+        return true;
     }
 
-    public void ReceiveItem()
+    public override string ToString()
     {
-        
+        return $"[NPC #{Id}] | NPC Name: {Name} | NPC Description: {Description}";
     }
     
 }
