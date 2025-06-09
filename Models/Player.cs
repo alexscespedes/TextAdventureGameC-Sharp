@@ -115,9 +115,7 @@ public class Player
 
         foreach (var item in Inventory)
         {
-            string usable = item.IsUsable ? "Yes" : "No";
-            string weapon = item.IsWeapon ? "Yes" : "No";
-            Console.WriteLine($"Item Name: {item.Name} | Item Description: {item.Description} | IsUsable: {usable} | Is a Weapon: {weapon}");
+            Console.WriteLine($"Item Name: {item.Name} | Item Description: {item.Description}");
         }
     }
 

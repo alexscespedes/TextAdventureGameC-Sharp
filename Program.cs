@@ -4,6 +4,7 @@ class Program
 {
     static void Main(string[] args)
     {
+        /*
         var ball = new Item("Ball", "Basketball Item", true, false);
         var shoes = new Item("Shoes", "Nike Shoes", true, false);
         var lambo = new Item("Lamboghini", "The Fancy Car", true, true);
@@ -16,6 +17,12 @@ class Program
 
         var player1 = new Player("Alexander Sencion", room1);
         var player2 = new Player("Stefan Salvatore", room5);
+        */
+
+        var lambo = new Item("Lamboghini", "The Fancy Car");
+
+        Console.WriteLine(lambo.ToString());
+
 
 
     }

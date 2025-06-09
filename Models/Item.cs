@@ -9,23 +9,20 @@ public class Item
 
     public string Description { get; set; }
 
-    public bool IsUsable { get; set; }
-
-    public bool IsWeapon { get; set; }
-
-    // Damage
-
-    public Item(string name, string description, bool isUsable, bool isWeapon)
+    public Item(string name, string description)
     {
         Id = Interlocked.Increment(ref nextId);
         Name = name;
         Description = description;
-        IsUsable = isUsable;
-        IsWeapon = isWeapon;
     }
 
     public void Use()
     {
-        
+        Console.WriteLine($"Item {Name} is used");
+    }
+
+    public override string ToString()
+    {
+        return $"[Item #{Id}] | Item Name: {Name} | Item Description: {Description}";
     }
 }
