@@ -22,6 +22,7 @@ public class NPC
         if (!CanTalk())
         {
             Console.WriteLine($"NPC {Name} doesn't have conversations ");
+            return;
         }
 
         foreach (var text in Dialogue)

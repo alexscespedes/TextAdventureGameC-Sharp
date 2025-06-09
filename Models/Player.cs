@@ -8,7 +8,6 @@ public class Player
     public int Health { get; set; } = 100;
     public Room CurrentRoom { get; set; }
     public List<Item> Inventory { get; set; }
-    public bool IsAlive { get; set; } = true;
 
     public Player(string name, Room currentRoom)
     {
@@ -22,22 +21,23 @@ public class Player
     {
         Health -= amount;
 
-        if (Health <= 0)
+        if (!IsAlive())
         {
-            IsAlive = false;
-        }
-    }
-
-    public void Heal(int amount)
-    {
-        Health += amount;
-
-        if (Health >= 100)
-        {
-            Console.WriteLine($" Player: [{Id}] - {Name} already has maximum health (100)");
+            Console.WriteLine($"The player {Name} has lost the game");
             return;
         }
+        Console.WriteLine($"Player {Name} has {Health} health points left");
     }
+
+    public bool IsAlive()
+    {
+        if (Health <= 0)
+        {
+            return false;
+        }
+        return true;
+    }
+
 
     public void AddToInventory(Item item)
     {
@@ -121,7 +121,6 @@ public class Player
 
     public override string ToString()
     {
-        string status = IsAlive ? "Alive" : "Dead";
-        return $"[Player #{Id}] | {Name} | {Health} | {CurrentRoom.Name} | {Inventory.Count} | {status}";
+        return $"[Player #{Id}] | {Name} | {Health} | {CurrentRoom.Name} | {Inventory.Count}";
     }
 }
