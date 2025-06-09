@@ -19,9 +19,9 @@ class Program
         var player2 = new Player("Stefan Salvatore", room5);
         */
 
-        var cpu = new NPC("Lamboghini", "The Fancy Car", ["Hey friend", "ready to play?"] );
+        var enemy = new Enemy("Lamboghini", "The Fancy Car");
 
-        cpu.Speak();
+        Console.WriteLine(enemy.Attack());
 
 
 

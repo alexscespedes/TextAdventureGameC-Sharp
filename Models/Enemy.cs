@@ -4,29 +4,49 @@ public class Enemy
 {
     public int Id { get; set; }
 
-    public int Health { get; set; }
+    public string Name { get; set; }
 
-    public int AttackPower { get; set; }
+    public string Description { get; set; }
 
-    public int Defense { get; set; }
+    public int Health { get; set; } = 100;
 
-    public Enemy()
+    public int AttackPower { get; set; } = 10;
+
+    public Enemy(string name, string description)
     {
-
+        Name = name;
+        Description = description;
     }
 
-    public void Attack()
+    public int Attack()
     {
-
+        var rand = new Random();
+        return rand.Next(1, 5) * AttackPower;
     }
 
-    public void TakeDamage()
+    public void TakeDamage(int amount)
     {
+        Health = Math.Max(Health - amount, 0);
 
+        if (!IsAlive())
+        {
+            Console.WriteLine($"The player {Name} has lost the game");
+            return;
+        }
+        Console.WriteLine($"Player {Name} has {Health} health points left");
     }
-    
-    public void IsAlive()
+
+    public bool IsAlive()
     {
-        
+        if (Health > 0)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public override string ToString()
+    {
+        return base.ToString()!;
     }
 }
