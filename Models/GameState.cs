@@ -6,29 +6,40 @@ public class GameState
 
     public List<Room> AllRooms { get; set; }
 
-    public Dictionary<string, bool> GameFlags { get; set; }
+    public int Score { get; set; } = 0;
 
-    public int Score { get; set; }
+    public bool IsGameOver { get; set; } = false;
 
-    public List<string> Inventory { get; set; }
-
-    public GameState()
+    public GameState(Player player)
     {
-
+        Player = player;
+        AllRooms = new List<Room>();
     }
 
-    public void SaveGame()
+    public bool IsRunning()
     {
-
+        if (IsGameOver)
+        {
+            EndGame();
+            return false;
+        }
+        return true;
     }
 
-    public void LoadGame()
+    public void EndGame()
     {
-
+        IsGameOver = true;
     }
-    
-    public void CheckWinCondition()
+
+    // Save/Load will be completed at the end
+
+    public void SaveGame() {}
+    public void LoadGame() {}
+
+    public void InitializeGame(Room room, Item item, NPC nPC)
     {
-        
+        AllRooms.Add(room);
+        room.AddItem(item);
+        room.AddNPC(nPC);
     }
 }
