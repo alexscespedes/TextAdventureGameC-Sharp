@@ -2,6 +2,7 @@ namespace TextAdventureGame;
 
 public class Enemy
 {
+    static int nextId;
     public int Id { get; set; }
 
     public string Name { get; set; }
@@ -14,6 +15,7 @@ public class Enemy
 
     public Enemy(string name, string description)
     {
+        Id = Interlocked.Increment(ref nextId);
         Name = name;
         Description = description;
     }
@@ -36,7 +38,7 @@ public class Enemy
         Console.WriteLine($"Player {Name} has {Health} health points left");
     }
 
-    public bool IsAlive()
+    private bool IsAlive()
     {
         if (Health > 0)
         {
@@ -47,6 +49,6 @@ public class Enemy
 
     public override string ToString()
     {
-        return base.ToString()!;
+        return $"[Enemy #{Id}] | {Name} | {Description} | {Health} | {AttackPower}";
     }
 }

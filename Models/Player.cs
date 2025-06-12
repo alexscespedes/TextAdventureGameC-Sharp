@@ -29,7 +29,7 @@ public class Player
         Console.WriteLine($"Player {Name} has {Health} health points left");
     }
 
-    public bool IsAlive()
+    private bool IsAlive()
     {
         if (Health <= 0)
         {

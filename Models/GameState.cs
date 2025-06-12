@@ -26,7 +26,7 @@ public class GameState
         return true;
     }
 
-    public void EndGame()
+    private void EndGame()
     {
         IsGameOver = true;
     }
@@ -35,11 +35,4 @@ public class GameState
 
     public void SaveGame() {}
     public void LoadGame() {}
-
-    public void InitializeGame(Room room, Item item, NPC nPC)
-    {
-        AllRooms.Add(room);
-        room.AddItem(item);
-        room.AddNPC(nPC);
-    }
 }

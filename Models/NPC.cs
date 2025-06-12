@@ -2,6 +2,7 @@ namespace TextAdventureGame;
 
 public class NPC
 {
+    static int nextId;
     public int Id { get; set; }
 
     public string Name { get; set; }
@@ -12,6 +13,7 @@ public class NPC
 
     public NPC(string name, string description, List<string> strings)
     {
+        Id = Interlocked.Increment(ref nextId);
         Name = name;
         Description = description;
         Dialogue = strings;
@@ -31,7 +33,7 @@ public class NPC
         }
     }
 
-    public bool CanTalk()
+    private bool CanTalk()
     {
         if (Dialogue.Count == 0)
         {
